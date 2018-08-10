@@ -17,10 +17,10 @@ public class AStar {
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, -2, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, -2, 0, 0, 0, 0},
-            {0, 0, -1, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, -2, 0, 0, 0, 0},
+            {0, 0, -1, 0, 0, -2, 0, 0, 0, 0},
+            {0, 0, -2, 0, 0, -2, 0, 0, 0, 0},
             {0, 0, -2, -2, -2, -2, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
+            {0, 0, 0, 0, 0, 0, -2, -2, 1, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     };
@@ -61,7 +61,7 @@ public class AStar {
         openList.addAll(getSurroundLattices(start, latticeMap, closeList));
         for (Lattice lattice : openList) {
             lattice.setG(getDistance(lattice, start));
-            lattice.setH(new Double(Math.abs(lattice.getX() - end.getX()) + Math.abs(lattice.getY() - end.getY())));
+            lattice.setH(getH(lattice,end));
             lattice.setF(lattice.getG() + lattice.getH());
             lattice.setParent(start);
         }
@@ -90,7 +90,7 @@ public class AStar {
                 successor.setParent(minFLattice);
 
                 successor.setG(newG);
-                successor.setH(new Double(Math.abs(successor.getX() - end.getX()) + Math.abs(successor.getY() - end.getY())));
+                successor.setH(getH(successor,end));
                 successor.setF(successor.getG() + successor.getH());
             }
         }
@@ -130,7 +130,9 @@ public class AStar {
                 if (current.getX().equals(x) && y.equals(current.getY())) {
                     continue;
                 }
-                surroundLattices.add(latticeMap[x][y]);
+                if (Math.abs(x - current.getX()) + Math.abs(y - current.getY()) == 1){
+                    surroundLattices.add(latticeMap[x][y]);
+                }
             }
         }
 
@@ -162,5 +164,9 @@ public class AStar {
         Integer side2 = Math.abs(lattice1.getY() - lattice2.getY());
         Double side3 = Math.sqrt(side1 * side1 + side2 * side2);
         return side3;
+    }
+
+    private static Double getH(Lattice lattice,Lattice end){
+        return new Double(Math.abs(lattice.getX() - end.getX()) + Math.abs(lattice.getY() - end.getY()));
     }
 }
