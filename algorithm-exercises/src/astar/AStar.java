@@ -7,26 +7,46 @@ import java.util.*;
  */
 public class AStar {
     /**
-     * Start : -1
-     * End : 1
-     * available :0
-     * unavailable : -2
+     * Start : 2
+     * End : 4
+     * available :6
+     * unavailable : 8
      */
     private static Integer[][] map = {
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, -2, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, -2, 0, 0, 0, 0},
-            {0, 0, -1, 0, 0, -2, 0, 0, 0, 0},
-            {0, 0, -2, 0, 0, -2, 0, 0, 0, 0},
-            {0, 0, -2, -2, -2, -2, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, -2, -2, 1, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {6, 6, 6, 6, 6, 8, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6},
+            {6, 6, 6, 6, 6, 8, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6},
+            {6, 6, 6, 6, 6, 8, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6},
+            {6, 6, 6, 6, 6, 8, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6},
+            {6, 6, 6, 6, 2, 8, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6},
+            {6, 6, 6, 6, 6, 8, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6},
+            {6, 6, 6, 6, 6, 8, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6},
+            {6, 6, 6, 6, 6, 8, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6},
+            {6, 6, 6, 6, 6, 8, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6},
+            {6, 6, 6, 6, 6, 8, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6},
+            {6, 6, 6, 6, 6, 8, 6, 6, 6, 8, 8, 8, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6},
+            {6, 6, 6, 6, 6, 8, 6, 6, 6, 8, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6},
+            {6, 6, 6, 6, 6, 8, 6, 6, 6, 8, 6, 6, 6, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8},
+            {6, 6, 6, 6, 6, 8, 6, 6, 6, 8, 6, 6, 6, 6, 8, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6},
+            {6, 6, 6, 6, 6, 8, 6, 6, 6, 8, 6, 6, 6, 6, 8, 8, 8, 8, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6},
+            {6, 6, 6, 6, 6, 8, 6, 6, 6, 8, 6, 6, 6, 6, 6, 6, 6, 8, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6},
+            {6, 6, 6, 6, 6, 8, 6, 6, 6, 8, 8, 8, 8, 8, 8, 8, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6},
+            {6, 6, 6, 6, 6, 8, 6, 6, 6, 6, 6, 6, 6, 6, 6, 8, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6},
+            {6, 6, 6, 6, 6, 8, 6, 6, 6, 6, 6, 6, 6, 6, 6, 8, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6},
+            {6, 6, 6, 6, 6, 8, 6, 6, 6, 6, 6, 6, 6, 6, 6, 8, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6},
+            {6, 6, 6, 6, 6, 8, 6, 6, 6, 6, 8, 8, 8, 8, 8, 8, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6},
+            {6, 6, 6, 6, 6, 8, 6, 6, 6, 6, 8, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6},
+            {6, 6, 6, 6, 6, 8, 6, 6, 6, 6, 8, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6},
+            {6, 6, 6, 6, 6, 8, 6, 8, 8, 8, 8, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6},
+            {6, 6, 6, 6, 6, 8, 6, 8, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6},
+            {6, 6, 6, 6, 6, 6, 6, 8, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6},
+            {6, 6, 6, 6, 6, 6, 6, 8, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6},
+            {6, 6, 6, 6, 6, 6, 6, 8, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6},
+            {6, 6, 6, 6, 6, 6, 6, 8, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6},
+            {6, 6, 6, 6, 6, 6, 6, 8, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 4},
     };
 
     public static void main(String[] args) {
-        Lattice[][] latticeMap = new Lattice[10][10];
+        Lattice[][] latticeMap = new Lattice[30][30];
 
         for (int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[0].length; j++) {
@@ -34,16 +54,16 @@ public class AStar {
                 lattice.setX(i);
                 lattice.setY(j);
                 switch (map[i][j]) {
-                    case 0:
+                    case 6:
                         lattice.setType(Type.NORMAL);
                         break;
-                    case 1:
+                    case 4:
                         lattice.setType(Type.END);
                         break;
-                    case -1:
+                    case 2:
                         lattice.setType(Type.START);
                         break;
-                    case -2:
+                    case 8:
                         lattice.setType(Type.BLOCK);
                         break;
                     default:
@@ -51,17 +71,16 @@ public class AStar {
                 latticeMap[i][j] = lattice;
             }
         }
-        Lattice start = latticeMap[4][2];
-        Lattice end = latticeMap[7][8];
+        Lattice start = latticeMap[4][4];
+        Lattice end = latticeMap[29][29];
 
-        Lattice now = start;
         Set<Lattice> openList = new HashSet<>();
         Set<Lattice> closeList = new HashSet<>();
 
         openList.addAll(getSurroundLattices(start, latticeMap, closeList));
         for (Lattice lattice : openList) {
             lattice.setG(getDistance(lattice, start));
-            lattice.setH(getH(lattice,end));
+            lattice.setH(getH(lattice, end));
             lattice.setF(lattice.getG() + lattice.getH());
             lattice.setParent(start);
         }
@@ -90,7 +109,7 @@ public class AStar {
                 successor.setParent(minFLattice);
 
                 successor.setG(newG);
-                successor.setH(getH(successor,end));
+                successor.setH(getH(successor, end));
                 successor.setF(successor.getG() + successor.getH());
             }
         }
@@ -115,13 +134,13 @@ public class AStar {
         if (leftX != -1) {
             xList.add(leftX);
         }
-        if (rightX != 10) {
+        if (rightX != 30) {
             xList.add(rightX);
         }
         if (leftY != -1) {
             yList.add(leftY);
         }
-        if (rightY != 10) {
+        if (rightY != 30) {
             yList.add(rightY);
         }
 
@@ -130,7 +149,7 @@ public class AStar {
                 if (current.getX().equals(x) && y.equals(current.getY())) {
                     continue;
                 }
-                if (Math.abs(x - current.getX()) + Math.abs(y - current.getY()) == 1){
+                if (Math.abs(x - current.getX()) + Math.abs(y - current.getY()) == 1) {
                     surroundLattices.add(latticeMap[x][y]);
                 }
             }
@@ -166,7 +185,7 @@ public class AStar {
         return side3;
     }
 
-    private static Double getH(Lattice lattice,Lattice end){
+    private static Double getH(Lattice lattice, Lattice end) {
         return new Double(Math.abs(lattice.getX() - end.getX()) + Math.abs(lattice.getY() - end.getY()));
     }
 }
