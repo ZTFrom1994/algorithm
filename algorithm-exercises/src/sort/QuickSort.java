@@ -21,9 +21,9 @@ public class QuickSort extends Sort {
             while (low <= high && a[low] <= a[k]) low++;
             while (high >= low && a[high] >= a[k]) high--;
             if (low >= high) break;
-            exchange(a,low, high);
+            swap(a,low, high);
         }
-        exchange(a,k, high);
+        swap(a,k, high);
         return high;
     }
 

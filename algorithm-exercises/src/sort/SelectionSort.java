@@ -23,7 +23,7 @@ public class SelectionSort extends Sort {
                     minIndex = j;
                 }
             }
-            exchange(a,i,minIndex);
+            swap(a,i,minIndex);
         }
         System.out.println(Arrays.toString(a));
     }
