@@ -1,0 +1,6 @@
+# Created by .ignore support plugin (hsz.mobi)
+algorithm-exercises/out/production/algorithm-exercises/generated/
+out/production/algorithm-exercises/generated/
+out
+lib/
+*.iml
