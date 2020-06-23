@@ -4,3 +4,4 @@ out/production/algorithm-exercises/generated/
 out
 lib/
 *.iml
+.idea
