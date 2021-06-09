@@ -10,10 +10,10 @@ package leetcode;
  * @author 张涛
  * @date 6/8/21 11:17 AM
  */
-public class T0010_MaxWaterContainer {
+public class T0011_MaxWaterContainer {
 
     public static void main(String[] args) {
-        T0010_MaxWaterContainer t = new T0010_MaxWaterContainer();
+        T0011_MaxWaterContainer t = new T0011_MaxWaterContainer();
         System.out.println(t.maxArea(new int[]{1, 8, 6, 2, 5, 4, 8, 3, 7}));
     }
 
