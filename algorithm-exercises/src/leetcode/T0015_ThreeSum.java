@@ -6,10 +6,10 @@ import java.util.*;
  * @author 张涛
  * @date 6/10/21 10:30 AM
  */
-public class T0014_ThreeSum {
+public class T0015_ThreeSum {
 
     public static void main(String[] args) {
-        T0014_ThreeSum t = new T0014_ThreeSum();
+        T0015_ThreeSum t = new T0015_ThreeSum();
         System.out.println(t.threeSum(new int[]{-1, 0, 1, 2, -1, -4}));
     }
 
