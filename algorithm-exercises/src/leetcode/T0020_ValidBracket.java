@@ -1,7 +1,6 @@
 package leetcode;
 
 import java.util.*;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * @author 张涛
