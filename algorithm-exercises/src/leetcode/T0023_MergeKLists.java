@@ -1,5 +1,7 @@
 package leetcode;
 
+import leetcode.data.ListNode;
+
 import java.util.*;
 
 /**
@@ -25,7 +27,7 @@ public class T0023_MergeKLists {
         ListNode l3 = new ListNode(2);
         l3.next = new ListNode(6);
 
-        ListNode[] listNodes = new ListNode[]{l1, l2,l3};
+        ListNode[] listNodes = new ListNode[]{l1, l2, l3};
         System.out.println(t.mergeKLists(listNodes));
     }
 
@@ -37,7 +39,7 @@ public class T0023_MergeKLists {
                 return o1.val - o2.val;
             }
         };
-        if (lists.length == 0){
+        if (lists.length == 0) {
             return null;
         }
         PriorityQueue<ListNode> priorityQueue = new PriorityQueue(lists.length, listNodeComparable);
@@ -94,21 +96,4 @@ public class T0023_MergeKLists {
 //        }
 //        return head.next;
 //    }
-
-    static class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode() {
-        }
-
-        ListNode(int val) {
-            this.val = val;
-        }
-
-        ListNode(int val, ListNode next) {
-            this.val = val;
-            this.next = next;
-        }
-    }
 }
