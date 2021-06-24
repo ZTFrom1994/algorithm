@@ -19,7 +19,7 @@ public class T0011_MaxWaterContainer {
 
     /**
      * 两个值之间宽度是固定的，水的高度以小的那个为准（短板效应）
-     *
+     * 双指针法：移动长的一端肯定不如上次的体积大，所以每次移动较短的一端，才可能找到最大体积
      * @param height
      * @return
      */
