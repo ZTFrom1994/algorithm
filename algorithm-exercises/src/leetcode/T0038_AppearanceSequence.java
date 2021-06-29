@@ -29,10 +29,10 @@ package leetcode;
  * @author 张涛
  * @date 6/28/21 9:33 AM
  */
-public class T0034_AppearanceSequence {
+public class T0038_AppearanceSequence {
 
     public static void main(String[] args) {
-        T0034_AppearanceSequence t = new T0034_AppearanceSequence();
+        T0038_AppearanceSequence t = new T0038_AppearanceSequence();
         System.out.println(t.countAndSay(5));
     }
 
